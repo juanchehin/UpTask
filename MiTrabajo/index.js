@@ -17,10 +17,10 @@ app.set('views', path.join(__dirname, './views'));
 
 // Habilitamos bodyparser para leer datos del form
 // app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 
 //

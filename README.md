@@ -13,6 +13,3 @@ Este es un repositorio para el curso "Curso de Node.js (Mayo de 2021)".
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 FLUSH PRIVILEGES;
-
-# Paquetes instalados
-- npm install mysql2 --save

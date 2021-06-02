@@ -2,9 +2,14 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+
+// Helpers con algunas funciones
+const helpers = require('./helpers');
 
 // Crear la conexion a la BD
 const db = require('./config/db');
+const { resolve } = require('path');
 
 // Importo el modelo
 require('./models/Proyectos');
@@ -16,6 +21,9 @@ db.sync()
 // Crear una app de express
 const app = express();
 
+// Agregamos express-validator
+app.use(expressValidator());
+
 // Archivos estaticos
 app.use(express.static('public'));
 
@@ -24,6 +32,12 @@ app.set('view engine', 'pug');
 
 // Carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
+
+// Pasar var dump a la aplicacion
+app.use((req, res, next) => {
+    res.locals.vardump = helpers.vardump;
+    next();
+});
 
 // Habilitamos bodyparser para leer datos del form
 // app.use(bodyParser.json());

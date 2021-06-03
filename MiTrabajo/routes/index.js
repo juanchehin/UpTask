@@ -39,10 +39,7 @@ exports.formularioEditar = (req, res) => {
     })
 }
 
-
-/*router.get('/index', (req, res, next) => {
-    res.send("I'm a test");
-    next();
-});*/
+// Eliminar proyecto
+router.delete('/proyectos/:url', proyectosController.eliminarProyecto);
 
 module.exports = router;

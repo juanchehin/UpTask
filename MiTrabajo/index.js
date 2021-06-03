@@ -4,6 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
+index = require('./routes/index');
+
 // Helpers con algunas funciones
 const helpers = require('./helpers');
 
@@ -41,12 +43,16 @@ app.use((req, res, next) => {
 
 // Habilitamos bodyparser para leer datos del form
 // app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
 //
-app.use('/', routes());
+app.use(express.urlencoded({ extended: true }));
+
+// app.use('/', routes() ); // <- Da problemas , se reempla
+
+app.use('/', index);
 
 app.listen(3000);

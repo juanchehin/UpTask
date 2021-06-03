@@ -18,10 +18,15 @@ router.post('/nuevo-proyecto',
 );
 
 // Listar proyecto
-// router.get('/proyectos/:url', proyectosController.proyectosPorUrl);
+router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
 
 // Actualizar proyecto
-router.get('/proyectos/editar/:url', proyectosController.formularioEditar);
+router.get('/proyecto/editar/:id', proyectosController.formularioEditar);
+
+router.post('/nuevo-proyecto/:id',
+    body('nombre').not().isEmpty().trim().escape(),
+    proyectosController.actualizarProyecto
+);
 
 // return router;
 // }

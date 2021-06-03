@@ -6,7 +6,6 @@ const { body } = require('express-validator/check');
 
 // Importar el controlador
 const proyectosController = require('../controllers/proyectosController');
-console.log('pasa index route');
 
 // module.exports = function() {
 

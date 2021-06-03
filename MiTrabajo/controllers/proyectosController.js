@@ -23,7 +23,7 @@ exports.nuevoProyecto = async(req, res) => {
     console.log('pasa');
 
     // validar que tengamos algo en el input
-    const nombre = req.body;
+    const nombre = req.body.nombre;
 
     let errores = [];
 
@@ -41,12 +41,12 @@ exports.nuevoProyecto = async(req, res) => {
     } else {
         console.log('else');
 
-
+        console.log('nombre es : ', nombre);
         // No hay errores
         // Insertar en la BD.
         //  const usuarioId = res.locals.usuario.id;
         // const url = slug(nombre).toLocaleLowerCase();
-        const proyecto = await Proyectos.create({ nombre, url });
+        const proyecto = await Proyectos.create({ nombre });
         res.redirect('/');
     }
 }
@@ -77,7 +77,7 @@ exports.formularioEditar = async(req, res) => {
 
     const proyectoPromise = await Proyectos.findOne({
         where: {
-            url: req.params.id
+            id: req.params.id
         }
     });
 

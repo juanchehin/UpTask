@@ -4,7 +4,11 @@ const Tareas = require('../models/Tareas');
 // const slug = require('slug');
 
 exports.proyectosHome = async(req, res) => {
+    // console.log('pasa proyectosHome');
+    console.log('res.locals proyectosHome', res.locals.usuario);
+    // console.log('req. proyectosHome', req);
     const usuarioId = res.locals.usuario.id;
+    console.log('pasa proyectosHome');
     const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
     res.render('index', {
@@ -49,9 +53,8 @@ exports.nuevoProyecto = async(req, res) => {
         console.log('nombre es : ', nombre);
         // No hay errores
         // Insertar en la BD.
-        //  const usuarioId = res.locals.usuario.id;
-        // const url = slug(nombre).toLocaleLowerCase();
-        await Proyectos.create({ nombre });
+        const usuarioId = res.locals.usuario.id;
+        await Proyectos.create({ nombre, usuarioId });
         res.redirect('/');
     }
 }
@@ -141,7 +144,10 @@ exports.actualizarProyecto = async(req, res) => {
     } else {
         // No hay errores
         // Insertar en la BD.
-        await Proyectos.update({ nombre: nombre }, { where: { id: req.params.id } });
+        await Proyectos.update(
+            { nombre: nombre },
+            { where: { id: req.params.id }} 
+        );
         res.redirect('/');
     }
 }

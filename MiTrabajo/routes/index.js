@@ -8,7 +8,7 @@ const { body } = require('express-validator/check');
 const proyectosController = require('../controllers/proyectosController');
 const tareasController = require('../controllers/tareasController');
 const usuariosController = require('../controllers/usuariosController');
-// const authController = require('../controllers/authController');
+const authController = require('../controllers/authController');
 
 // module.exports = function() {
 
@@ -84,7 +84,7 @@ router.delete('/tareas/:id',
 // Crear nueva cuenta
 router.get('/crear-cuenta', usuariosController.formCrearCuenta);
 router.post('/crear-cuenta', usuariosController.crearCuenta);
-// router.get('/confirmar/:correo', usuariosController.confirmarCuenta);
+router.get('/confirmar/:correo', usuariosController.confirmarCuenta);
 
 // iniciar sesión
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);

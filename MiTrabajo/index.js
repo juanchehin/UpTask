@@ -20,7 +20,7 @@ const { resolve } = require('path');
 // Importo el modelo
 require('./models/Proyectos');
 require('./models/Tareas');
-
+require('./models/Usuarios');
 
 db.sync()
     .then(() => console.log('Conectado al Servidor'))
@@ -45,8 +45,7 @@ app.use(expressValidator());
 // Carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
 
-// Flash messages
-app.use(flash());
+
 
 app.use(cookieParser());
 
@@ -61,7 +60,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Pasar var dump a la aplicacion
+// agregar flash messages
+app.use(flash());
+
+// Pasar var dump a la aplicación
 app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump;
     res.locals.mensajes = req.flash();

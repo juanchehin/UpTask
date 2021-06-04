@@ -7,6 +7,9 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 const enviarEmail = require('../handlers/email');
 
+console.log('pasa AuthController pass aut es');
+
+
 // autenticar el usuario
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/',
@@ -14,6 +17,9 @@ exports.autenticarUsuario = passport.authenticate('local', {
     failureFlash: true,
     badRequestMessage: 'Ambos Campos son Obligatorios'
 });
+console.log(exports.autenticarUsuario);
+
+console.log('pasa AuthController 1');
 
 // Función para revisar si el usuario esta logueado o no
 exports.usuarioAutenticado = (req, res, next) => {
@@ -25,6 +31,7 @@ exports.usuarioAutenticado = (req, res, next) => {
     // sino esta autenticado, redirigir al formulario
     return res.redirect('/iniciar-sesion');
 }
+console.log('pasa AuthController 2');
 
 // función para cerrar sesión
 exports.cerrarSesion = (req, res) => {
@@ -32,6 +39,8 @@ exports.cerrarSesion = (req, res) => {
         res.redirect('/iniciar-sesion'); // al cerrar sesión nos lleva al login
     })
 }
+
+console.log('pasa AuthController 3');
 
 // genera un token si el usuario es valido
 exports.enviarToken = async(req, res) => {
@@ -68,6 +77,9 @@ exports.enviarToken = async(req, res) => {
     req.flash('correcto', 'Se envió un mensaje a tu correo');
     res.redirect('/iniciar-sesion');
 }
+
+console.log('pasa AuthController 4');
+
 
 exports.validarToken = async(req, res) => {
     const usuario = await Usuarios.findOne({

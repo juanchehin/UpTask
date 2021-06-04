@@ -28,6 +28,7 @@ passport.use(
                     })
                 }
                 // El email existe, y el password correcto
+                console.log('usuario en passport.js -> linea 31 es :', usuario);
                 return done(null, usuario);
             } catch (error) {
                 // Ese usuario no existe

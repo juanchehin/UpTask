@@ -4,11 +4,7 @@ const Tareas = require('../models/Tareas');
 // const slug = require('slug');
 
 exports.proyectosHome = async(req, res) => {
-    // console.log('pasa proyectosHome');
-    console.log('res.locals proyectosHome', res.locals.usuario);
-    // console.log('req. proyectosHome', req);
     const usuarioId = res.locals.usuario.id;
-    console.log('pasa proyectosHome');
     const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
     res.render('index', {
@@ -48,9 +44,6 @@ exports.nuevoProyecto = async(req, res) => {
             proyectos
         })
     } else {
-        console.log('else');
-
-        console.log('nombre es : ', nombre);
         // No hay errores
         // Insertar en la BD.
         const usuarioId = res.locals.usuario.id;
@@ -60,10 +53,6 @@ exports.nuevoProyecto = async(req, res) => {
 }
 
 exports.proyectoPorUrl = async(req, res, next) => {
-    console.log('pasa proyectoPorUrl en proyectosController');
-    console.log('req params es : ', req.params);
-    console.log('res es : ', res);
-    console.log('res locals es : ', res.locals.usuario);
 
     const usuarioId = res.locals.usuario.id;
     const proyectosPromise = Proyectos.findAll({ where: { usuarioId } });
@@ -123,7 +112,6 @@ exports.actualizarProyecto = async(req, res) => {
     const proyectos = await Proyectos.findAll({ where: { usuarioId } });
 
     // Enviar a la consola lo que el usuario escriba.
-    // console.log(req.body);
 
     // validar que tengamos algo en el input
     const nombre = req.body.nombre;
@@ -144,10 +132,7 @@ exports.actualizarProyecto = async(req, res) => {
     } else {
         // No hay errores
         // Insertar en la BD.
-        await Proyectos.update(
-            { nombre: nombre },
-            { where: { id: req.params.id }} 
-        );
+        await Proyectos.update({ nombre: nombre }, { where: { id: req.params.id } });
         res.redirect('/');
     }
 }
@@ -155,7 +140,6 @@ exports.actualizarProyecto = async(req, res) => {
 exports.eliminarProyecto = async(req, res, next) => {
 
     // req, query o params
-    // console.log(req.query);
     const { urlProyecto } = req.query;
 
     const resultado = await Proyectos.destroy({ where: { url: urlProyecto } });
